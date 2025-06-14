@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: gpsapp
+      POSTGRES_PASSWORD: gpsapp
+      POSTGRES_DB: gpsapp
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+  backend:
+    build: ./backend
+    env_file: .env
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "8000:8000"
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+volumes:
+  db-data:

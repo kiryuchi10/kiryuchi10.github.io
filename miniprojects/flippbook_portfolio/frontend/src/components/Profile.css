@@ -1,0 +1,34 @@
+.profile-hero {
+    position: relative;
+    height: 250px; /* 기존보다 더 높게 */
+    background-color: #000;
+    overflow: visible; /* overflow를 숨기지 말고 보이게 */
+  }
+  
+  .profile-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+  
+  /* ✅ 프로필 이미지 위치 재조정 */
+  .profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 50%;
+    bottom: -70px; /* 배경보다 아래쪽으로 반쯤 걸치도록 */
+    transform: translateX(-50%);
+    border: 5px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    z-index: 2;
+  }
+  
+  .profile-content {
+    padding-top: 90px; /* 위 여백을 더 주어 잘려 보이지 않게 */
+  }
+  

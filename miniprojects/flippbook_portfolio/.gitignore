@@ -1,0 +1,17 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# React
+node_modules/
+build/
+dist/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Uploads (optional)
+backend-fastapi/app/uploads/

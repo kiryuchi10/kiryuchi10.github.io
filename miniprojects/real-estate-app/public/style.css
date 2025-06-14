@@ -1,0 +1,38 @@
+/* /public/style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar {
+    width: 250px;
+    padding: 20px;
+    background: #f8f8f8;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    overflow-y: auto;
+}
+
+#map {
+    flex: 1;
+    height: 100vh;
+}
+
+input[type="range"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+}

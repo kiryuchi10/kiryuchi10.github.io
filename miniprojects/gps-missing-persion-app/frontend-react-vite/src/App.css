@@ -1,0 +1,15 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+input {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}

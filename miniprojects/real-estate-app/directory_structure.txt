@@ -1,0 +1,16 @@
+/realestate-app/
+ ├── public/
+ │    ├── icons/
+ │    ├── index.html
+ │    ├── style.css
+ │    └── script.js
+ ├── models/
+ │    └── Property.js (for Mongoose or Sequelize Model)
+ ├── routes/
+ │    ├── properties.js
+ │    └── users.js (optional if login)
+ ├── server.js
+ ├── .env
+ ├── package.json
+ └── config/
+      └── db.js
