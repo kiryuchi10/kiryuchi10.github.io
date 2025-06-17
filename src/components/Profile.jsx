@@ -53,10 +53,7 @@ function Profile() {
         <About />
       </section>
 
-      {/* 🧠 Works / Projects Section */}
-      <section id="works" className="profile-section">
-        <Works />
-      </section>
+
     </div>
   );
 }

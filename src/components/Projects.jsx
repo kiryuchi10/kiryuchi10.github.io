@@ -9,7 +9,7 @@ export const projects = [
       { name: "MySQL", color: "text-yellow-500" },
     ],
     image: "/images/sensor_dashboard.png",
-    sourceCodeLink: "https://github.com/yourrepo/smart-sensor",
+    sourceCodeLink: "https://github.com/kiryuchi10/smart-sensor-dashboard",
   },
   {
     name: "Pixel Art Generator",
@@ -20,6 +20,6 @@ export const projects = [
       { name: "Pillow", color: "text-yellow-500" },
     ],
     image: "/images/pixel_art.png",
-    sourceCodeLink: "https://github.com/yourrepo/pixel-art",
+    sourceCodeLink: "https://github.com/kiryuchi10/pixel-art",
   },
 ];

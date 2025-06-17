@@ -1,1 +1,0 @@
-# FastAPI endpoint for image conversion
