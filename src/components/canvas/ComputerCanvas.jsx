@@ -1,25 +1,26 @@
-// src/components/canvas/ComputerCanvas.jsx
+// ComputerCanvas.jsx
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Text } from "@react-three/drei";
+import { OrbitControls, Html } from "@react-three/drei";
 import Loader from "../Loader";
 
+// ASCII Art Map
+const asciiMap = {
+  DNA: `     CCC     WWW\n    C   C   W   W\n   C     C W     W\n    C   C   W   W\n     CCC     WWW`,
+  Battery: `   _______\n  |_______|\n  |       |\n  |  ⚡⚡⚡  |\n  |_______|`,
+  Pill: `     _________\n   /          \\\n  |   █████   |\n   \\__________/`,
+  Flask: `     ___\n    /   \\\n   |     |\n   | (_) |\n   |_____| \n     |||`,
+};
+
+// Component to render each ASCII art block
 const GridAsciiBox = ({ position, label }) => (
-  <group>
-    <mesh position={position}>
-      <boxGeometry args={[1.5, 1.5, 1.5]} />
-      <meshStandardMaterial color="#915EFF" />
-    </mesh>
-    <Text
-      position={[position[0], position[1] - 1.2, position[2]]}
-      fontSize={0.3}
-      color="white"
-      anchorX="center"
-      anchorY="middle"
-      maxWidth={4}
-    >
-      {label}
-    </Text>
+  <group position={position}>
+    <Html center>
+      <div style={{ textAlign: "center", fontFamily: "monospace", color: "white", fontSize: "0.9rem", whiteSpace: "pre" }}>
+        <pre>{asciiMap[label]}</pre>
+        <p>{label}</p>
+      </div>
+    </Html>
   </group>
 );
 

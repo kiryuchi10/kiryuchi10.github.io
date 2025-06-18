@@ -1,20 +1,12 @@
-// src/components/Loader.jsx
+// Loader.jsx (valid fallback inside <Canvas>)
 import React from "react";
 
 const Loader = () => {
   return (
-    <div style={{
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: "white",
-      fontSize: "1.5rem",
-      backgroundColor: "#0f0f0f"
-    }}>
-      Loading 3D Scene...
-    </div>
+    <mesh>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="gray" />
+    </mesh>
   );
 };
 

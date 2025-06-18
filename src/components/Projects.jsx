@@ -1,4 +1,8 @@
-// frontend/src/components/Projects.jsx
+import React from "react";
+import "./Projects.css";
+import sensorDashboardImg from "../assets/sensor_dashboard.png";
+import pixelArtImg from "../assets/pixel_art.jpeg";
+
 export const projects = [
   {
     name: "Smart Sensor Dashboard",
@@ -8,7 +12,7 @@ export const projects = [
       { name: "FastAPI", color: "text-green-500" },
       { name: "MySQL", color: "text-yellow-500" },
     ],
-    image: "/images/sensor_dashboard.png",
+    image: sensorDashboardImg,
     sourceCodeLink: "https://github.com/kiryuchi10/smart-sensor-dashboard",
   },
   {
@@ -19,7 +23,34 @@ export const projects = [
       { name: "FastAPI", color: "text-green-500" },
       { name: "Pillow", color: "text-yellow-500" },
     ],
-    image: "/images/pixel_art.png",
-    sourceCodeLink: "https://github.com/kiryuchi10/pixel-art",
+    image: pixelArtImg,
+    sourceCodeLink: "https://github.com/kiryuchi10/pixel-art-generator",
   },
 ];
+
+const Projects = () => {
+  return (
+    <section className="projects-wrapper">
+      {projects.map((project, index) => (
+        <div className="project-card" key={index}>
+          <a href={project.sourceCodeLink} target="_blank" rel="noopener noreferrer">
+            <img src={project.image} alt={project.name} className="project-image" />
+          </a>
+          <div className="project-content">
+            <div className="project-title">{project.name}</div>
+            <div className="project-description">{project.description}</div>
+            <div className="project-tags">
+              {project.tags.map((tag, tagIndex) => (
+                <span key={tagIndex} className="project-tag" style={{ color: tag.color }}>
+                  #{tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+};
+
+export default Projects;

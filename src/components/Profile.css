@@ -1,34 +1,49 @@
-.profile-hero {
-    position: relative;
-    height: 250px; /* 기존보다 더 높게 */
-    background-color: #000;
-    overflow: visible; /* overflow를 숨기지 말고 보이게 */
-  }
-  
-  .profile-bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.6;
-  }
-  
-  /* ✅ 프로필 이미지 위치 재조정 */
-  .profile-pic {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    left: 50%;
-    bottom: -70px; /* 배경보다 아래쪽으로 반쯤 걸치도록 */
-    transform: translateX(-50%);
-    border: 5px solid white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    background-color: white;
-    z-index: 2;
-  }
-  
-  .profile-content {
-    padding-top: 90px; /* 위 여백을 더 주어 잘려 보이지 않게 */
-  }
-  
+.projects-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.project-card {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* makes sure image fills fully */
+}
+
+.project-content {
+  padding: 1rem;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.project-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
