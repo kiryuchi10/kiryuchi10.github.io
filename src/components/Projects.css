@@ -52,3 +52,39 @@
   font-size: 0.95rem;
   font-weight: 500;
 }
+
+.profile-hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.background-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.profile-pic-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.profile-pic {
+  width: 360px;   /* ⬅️ Twice as large */
+  height: 360px;
+  border-radius: 50%;
+  border: 5px solid white;
+  object-fit: cover;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}

@@ -42,15 +42,15 @@ function ContactForm() {
             </li>
             <li>
               <i className="fas fa-phone"></i>
-              <span><strong>Phone:</strong> +123 2355 98</span>
+              <span><strong>Phone:</strong> +512 731 2449</span>
             </li>
             <li>
               <i className="fas fa-paper-plane"></i>
-              <span><strong>Email:</strong> info@yoursite.com</span>
+              <span><strong>Email:</strong> donghyeunlee1@gmail.com</span>
             </li>
             <li>
               <i className="fas fa-globe"></i>
-              <span><strong>Website:</strong> yoursite.com</span>
+              <span><strong>Website:</strong> kiryuchi10.github.io</span>
             </li>
           </ul>
         </div>

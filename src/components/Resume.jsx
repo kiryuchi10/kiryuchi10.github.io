@@ -8,7 +8,7 @@ function Resume() {
       <p>You can download my resume as a PDF below:</p>
 
       <a
-        href="/resume/DONG_HYEUN_LEE_Resume.pdf"
+        href="/resume/DONGHYEUN LEE_Junior AI Engineer - Full Stack_20250709.pdf"
         download="Donghyeun_Lee_Resume.pdf"
         className="download-btn"
       >

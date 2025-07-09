@@ -1,20 +1,21 @@
-import React from 'react';
-import './Profile.css';
-import profileImage from '../assets/반명함.jpg';
-import About from './About'; //About section
-import Works from './Works'; //Works section
+import React from "react";
+import "./Profile.css";
+import profileImage from "../assets/KakaoTalk_20250708_231845951.jpg";
+import backgroundGif from "../assets/falling-stars-stars.gif"; // 👈 import GIF
+import About from "./About";
 
 function Profile() {
   return (
     <div className="profile-container">
       {/* Profile Hero */}
       <div className="profile-hero">
-        <img
-          className="profile-bg"
-          src="https://images.unsplash.com/photo-1499346030926-9a72daac6c63"
-          alt="background"
-        />
-        <img className="profile-pic" src={profileImage} alt="Donghyeun Lee" />
+        {/* Local falling stars background */}
+        <img src={backgroundGif} alt="Falling Stars" className="background-gif" />
+
+        {/* Enlarged profile image */}
+        <div className="profile-pic-wrapper">
+          <img className="profile-pic" src={profileImage} alt="Donghyeun Lee" />
+        </div>
       </div>
 
       {/* Basic Info */}
@@ -32,8 +33,10 @@ function Profile() {
         </div>
 
         <p className="profile-description">
-          Full Stack Developer with 4+ years of biotech R&D experience, specializing in React, Flask, Spring Boot, and AI integration. 
-          Created web apps for manufacturing analytics and nanopore chip defect prediction using Python and ML.
+          Full Stack Developer with 4+ years of biotech R&D experience,
+          specializing in React, Flask, Spring Boot, and AI integration.
+          Created web apps for manufacturing analytics and nanopore chip
+          defect prediction using Python and ML.
         </p>
 
         <div className="profile-buttons">
@@ -48,12 +51,10 @@ function Profile() {
         </div>
       </div>
 
-      {/* 🧠 About Section */}
+      {/* About Section */}
       <section id="about" className="profile-section">
         <About />
       </section>
-
-
     </div>
   );
 }
