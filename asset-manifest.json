@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0223cab8.css",
+    "main.js": "/static/js/main.b413cb84.js",
+    "static/media/falling-stars-stars.gif": "/static/media/falling-stars-stars.540aeee9fe6b0a8f1a88.gif",
+    "static/media/KakaoTalk_20250708_231845951.jpg": "/static/media/KakaoTalk_20250708_231845951.2a5cb6d6149d204fa073.jpg",
+    "static/media/DHL_avatar.jpg": "/static/media/DHL_avatar.27d0ef5aff6f546040a9.jpg",
+    "static/media/sensor_dashboard.png": "/static/media/sensor_dashboard.fca1418de43b5efe9358.png",
+    "static/media/scm_app.png": "/static/media/scm_app.09c27096584bcac79229.png",
+    "static/media/family_app.jpg": "/static/media/family_app.313fc0c699a3d2d78cf7.jpg",
+    "static/media/pixel_art.jpeg": "/static/media/pixel_art.af3b733b2a28db8a0f5f.jpeg",
+    "index.html": "/index.html",
+    "main.0223cab8.css.map": "/static/css/main.0223cab8.css.map",
+    "main.b413cb84.js.map": "/static/js/main.b413cb84.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0223cab8.css",
+    "static/js/main.b413cb84.js"
+  ]
+}
