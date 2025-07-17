@@ -7,8 +7,13 @@ import Profile from './components/Profile';
 import Resume from './components/Resume';
 import ContactForm from './components/ContactForm';
 import Works from './components/Works';
+import Analytics from './components/Analytics';
+import Blog from './components/Blog';
+import { useVisitorTracking } from './hooks';
 
 function App() {
+  useVisitorTracking(window.location.pathname);
+
   return (
     <div style={{ display: 'flex' }}>
       <NavigationBar />
@@ -23,6 +28,8 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/projects" element={<Works />} />
           <Route path="/contact" element={<ContactForm />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/analytics" element={<Analytics />} />
 
           {/* Optional fallback route */}
           <Route path="*" element={<Navigate to="/" />} />

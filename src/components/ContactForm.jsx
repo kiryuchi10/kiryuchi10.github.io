@@ -8,11 +8,38 @@ function ContactForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 여기서 fetch 또는 axios 사용 가능
-    alert('Message sent!');
-    setForm({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+        console.error('Error:', result.error);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Network error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -28,7 +55,15 @@ function ContactForm() {
             </div>
             <input type="text" name="subject" placeholder="Subject" value={form.subject} onChange={handleChange} required />
             <textarea name="message" placeholder="Message" rows="5" value={form.message} onChange={handleChange} required />
-            <button type="submit">Send Message</button>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </button>
+            {submitStatus === 'success' && (
+              <div className="status-message success">Message sent successfully!</div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="status-message error">Failed to send message. Please try again.</div>
+            )}
           </form>
         </div>
 

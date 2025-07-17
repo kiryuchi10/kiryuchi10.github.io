@@ -11,9 +11,7 @@ const Hero = () => {
       </h1>
       <div style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", gap: "2rem", flexWrap: "wrap" }}>
         {/* Left: Canvas */}
-        <div style={{ width: "600px", height: "500px", flexShrink: 0 }}>
-          <ComputerCanvas />
-        </div>
+        
 
         {/* Right: Avatar */}
         <div style={{ width: "300px", textAlign: "center" }}>

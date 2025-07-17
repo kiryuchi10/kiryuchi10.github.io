@@ -11,7 +11,9 @@ function NavigationBar() {
     { to: '/profile', label: '👤 Profile' },
     { to: '/resume', label: '📄 Resume' },
     { to: '/projects', label: '💻 Projects' },
+    { to: '/blog', label: '📝 Blog' },
     { to: '/contact', label: '✉️ Contact' },
+    { to: '/analytics', label: '📊 Analytics' },
   ];
 
   const toggleSidebar = () => setOpen(!open);
