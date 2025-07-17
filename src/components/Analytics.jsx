@@ -4,34 +4,79 @@ import './Analytics.css';
 function Analytics() {
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchAnalytics();
-  }, []);
-
-  const fetchAnalytics = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/analytics');
-      if (response.ok) {
-        const data = await response.json();
-        setAnalytics(data);
-      } else {
-        setError('Failed to fetch analytics');
-      }
-    } catch (err) {
-      setError('Network error: ' + err.message);
-    } finally {
-      setLoading(false);
-    }
+  // Mock analytics data for demonstration
+  const mockAnalytics = {
+    total_visitors: 1247,
+    github_users: 89,
+    total_messages: 23,
+    visitors_by_country: [
+      ['South Korea', 456],
+      ['United States', 234],
+      ['Japan', 178],
+      ['Germany', 123],
+      ['Canada', 89],
+      ['United Kingdom', 67],
+      ['Australia', 45],
+      ['France', 34],
+      ['Singapore', 21]
+    ],
+    visitors_by_page: [
+      ['/', 567],
+      ['/projects', 289],
+      ['/profile', 234],
+      ['/blog', 89],
+      ['/contact', 68]
+    ],
+    recent_visitors: [
+      ['visitor1', '192.168.1.1', new Date().toISOString(), 'Seoul', 'South Korea', null, '/', 'https://google.com'],
+      ['visitor2', '10.0.0.1', new Date(Date.now() - 3600000).toISOString(), 'Tokyo', 'Japan', 'GitHub User', '/projects', 'https://github.com'],
+      ['visitor3', '172.16.0.1', new Date(Date.now() - 7200000).toISOString(), 'New York', 'United States', null, '/profile', 'direct'],
+      ['visitor4', '203.0.113.1', new Date(Date.now() - 10800000).toISOString(), 'London', 'United Kingdom', null, '/blog', 'https://linkedin.com'],
+      ['visitor5', '198.51.100.1', new Date(Date.now() - 14400000).toISOString(), 'Berlin', 'Germany', 'GitHub User', '/contact', 'https://twitter.com']
+    ]
   };
 
-  if (loading) return <div className="analytics-loading">Loading analytics...</div>;
-  if (error) return <div className="analytics-error">Error: {error}</div>;
-  if (!analytics) return <div className="analytics-error">No data available</div>;
+  useEffect(() => {
+    // Simulate loading time for better UX
+    const timer = setTimeout(() => {
+      setAnalytics(mockAnalytics);
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="analytics-container">
+        <div className="analytics-loading">
+          <div className="loading-spinner"></div>
+          <h2>Loading Analytics Dashboard...</h2>
+          <p>Gathering visitor insights and statistics</p>
+        </div>
+      </div>
+    );
+  }
+
+  const currentTime = new Date().toLocaleString();
 
   return (
-    <div className="analytics-container">
+    <div className="analytics-container" data-time={currentTime}>
+      <div className="demo-badge">Demo Mode</div>
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div style={{ 
+          background: '#f8f9fa', 
+          padding: '0.75rem 1.5rem', 
+          borderRadius: '25px', 
+          display: 'inline-block',
+          color: '#666',
+          fontSize: '0.9rem',
+          marginBottom: '1rem'
+        }}>
+          📅 Last updated: {currentTime}
+        </div>
+      </div>
       <h1>Visitor Analytics Dashboard</h1>
       
       <div className="analytics-grid">
