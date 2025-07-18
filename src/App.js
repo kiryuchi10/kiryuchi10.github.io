@@ -9,10 +9,17 @@ import ContactForm from './components/ContactForm';
 import Works from './components/Works';
 import Analytics from './components/Analytics';
 import Blog from './components/Blog';
+import VisitorTracker from './components/VisitorTracker';
+import ApiStatusChecker from './components/ApiStatusChecker';
 import { useVisitorTracking } from './hooks';
 
 function App() {
-  useVisitorTracking(window.location.pathname);
+  // Initialize visitor tracking with automatic page tracking enabled
+  useVisitorTracking({
+    trackOnMount: true,
+    trackPageChanges: true,
+    enableDebug: process.env.NODE_ENV === 'development'
+  });
 
   return (
     <div style={{ display: 'flex' }}>
@@ -35,6 +42,16 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
+      
+      {/* Debug Components - only show in development */}
+      <VisitorTracker showDebugInfo={process.env.NODE_ENV === 'development'} />
+      
+      {/* API Status Checker for testing - shows in development and can be enabled in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1001 }}>
+          <ApiStatusChecker showInProduction={false} />
+        </div>
+      )}
     </div>
   );
 }

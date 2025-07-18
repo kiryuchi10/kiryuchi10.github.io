@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: portfolio-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && python start.py
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: DATABASE_URL
+        value: portfolio.db
+      - key: SENDER_EMAIL
+        sync: false
+      - key: SENDER_PASSWORD
+        sync: false
+      - key: RECIPIENT_EMAIL
+        value: donghyeunlee1@gmail.com
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false
+    disk:
+      name: portfolio-data
+      mountPath: /opt/render/project/src/backend
+      sizeGB: 1
