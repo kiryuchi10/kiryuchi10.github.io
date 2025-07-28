@@ -6,8 +6,8 @@ Handles database initialization and environment validation before starting the F
 
 import os
 import sys
-import sqlite3
 from dotenv import load_dotenv
+from database import db_config
 
 def validate_environment():
     """Validate required environment variables for production"""
@@ -45,52 +45,7 @@ def validate_environment():
 def init_database():
     """Initialize database with proper error handling"""
     try:
-        database_url = os.getenv('DATABASE_URL', 'portfolio.db')
-        print(f"Initializing database: {database_url}")
-        
-        # Use improved connection with timeout and retry logic
-        conn = sqlite3.connect(database_url, timeout=30, check_same_thread=False)
-        cursor = conn.cursor()
-        
-        # Visitors table
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS visitors (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                ip_address TEXT,
-                user_agent TEXT,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-                country TEXT,
-                city TEXT,
-                github_user TEXT,
-                page_visited TEXT,
-                referrer TEXT
-            )
-        ''')
-        
-        # Contact messages table
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS contact_messages (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL,
-                subject TEXT NOT NULL,
-                message TEXT NOT NULL,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-                ip_address TEXT
-            )
-        ''')
-        
-        # Create indexes for better performance
-        cursor.execute('CREATE INDEX IF NOT EXISTS idx_visitors_timestamp ON visitors(timestamp)')
-        cursor.execute('CREATE INDEX IF NOT EXISTS idx_visitors_country ON visitors(country)')
-        cursor.execute('CREATE INDEX IF NOT EXISTS idx_contact_timestamp ON contact_messages(timestamp)')
-        
-        conn.commit()
-        conn.close()
-        
-        print("Database initialized successfully")
-        return True
-        
+        return db_config.init_database()
     except Exception as e:
         print(f"ERROR: Failed to initialize database: {str(e)}")
         sys.exit(1)

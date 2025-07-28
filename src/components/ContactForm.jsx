@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import './ContactForm.css';
 import { useContactForm } from '../hooks/useContactForm';
 import Notification from './common/Notification';
+import { BuyMeACoffeeWidget } from './BuyMeACoffee';
+import { motion } from 'framer-motion';
 
 function ContactForm() {
   const [notifications, setNotifications] = useState([]);
@@ -109,7 +111,12 @@ function ContactForm() {
       <section className="contact-section">
         <div className="contact-container">
           {/* Form Side */}
-          <div className="form-box">
+          <motion.div 
+            className="form-box"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <h2>Get in touch</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-row">
@@ -182,7 +189,12 @@ function ContactForm() {
           </div>
 
           {/* Info Side */}
-          <div className="info-box">
+          <motion.div 
+            className="info-box"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             <h2>Contact us</h2>
             <ul>
               <li>
@@ -202,7 +214,16 @@ function ContactForm() {
                 <span><strong>Website:</strong> kiryuchi10.github.io</span>
               </li>
             </ul>
-          </div>
+            
+            {/* Support Widget */}
+            <div style={{ marginTop: '30px', padding: '20px', background: 'rgba(74, 144, 226, 0.1)', borderRadius: '10px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '10px', color: '#333' }}>Support My Work</h3>
+              <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '15px' }}>
+                If you find my work helpful, consider supporting me!
+              </p>
+              <BuyMeACoffeeWidget compact={true} />
+            </div>
+          </motion.div>
         </div>
       </section>
 

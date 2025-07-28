@@ -27,9 +27,12 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "deploy:netlify": "npm run build && netlify deploy --prod --dir=build",
+    "preview:netlify": "npm run build && netlify deploy --dir=build",
     "backend": "cd backend && python app.py",
     "setup-backend": "cd backend && python setup.py",
-    "dev": "concurrently \"npm start\" \"npm run backend\""
+    "dev": "concurrently \"npm start\" \"npm run backend\"",
+    "analyze": "npm run build && npx bundle-analyzer build/static/js/*.js"
   },
   "eslintConfig": {
     "extends": [

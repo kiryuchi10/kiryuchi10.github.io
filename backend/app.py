@@ -1,9 +1,9 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, make_response
 from flask_cors import CORS
+from functools import wraps
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import sqlite3
 import os
 from datetime import datetime
 import json
@@ -13,20 +13,29 @@ import html
 import time
 from functools import wraps
 from dotenv import load_dotenv
+from database import db_config
+from routes.ab_testing import ab_testing_bp
+from ab_testing_schema import init_ab_testing_tables
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 
+# Register A/B testing blueprint
+app.register_blueprint(ab_testing_bp, url_prefix='/api/ab')
+
 # Production configuration
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
-    DATABASE_URL = os.getenv('DATABASE_URL', 'portfolio.db')
+    DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///portfolio.db')
     SENDER_EMAIL = os.getenv('SENDER_EMAIL')
     SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
     RECIPIENT_EMAIL = os.getenv('RECIPIENT_EMAIL', 'donghyeunlee1@gmail.com')
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', '*').split(',')
+    # Parse CORS origins properly, handling both comma-separated list and single values
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', '*')
+    if CORS_ORIGINS != '*' and ',' in CORS_ORIGINS:
+        CORS_ORIGINS = [origin.strip() for origin in CORS_ORIGINS.split(',')]
     FLASK_ENV = os.getenv('FLASK_ENV', 'development')
 
 app.config.from_object(Config)
@@ -56,33 +65,22 @@ def validate_environment():
 
 # Configure CORS with specific origins for production
 if app.config['FLASK_ENV'] == 'production':
-    CORS(app, origins=app.config['CORS_ORIGINS'])
+    # Ensure CORS is properly configured with explicit origins and credentials support
+    CORS(app, 
+         resources={r"/api/*": {"origins": app.config['CORS_ORIGINS']}},
+         supports_credentials=True,
+         allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+         expose_headers=["Content-Type", "Authorization"])
+    print(f"CORS configured with origins: {app.config['CORS_ORIGINS']}")
 else:
     CORS(app)  # Allow all origins in development
+    print("CORS configured to allow all origins in development mode")
 
 # Database connection handling with retry logic
 def get_db_connection(max_retries=3, retry_delay=1):
     """Get database connection with retry logic for cloud environments"""
-    for attempt in range(max_retries):
-        try:
-            conn = sqlite3.connect(
-                app.config['DATABASE_URL'],
-                timeout=30,  # 30 second timeout
-                check_same_thread=False
-            )
-            conn.row_factory = sqlite3.Row  # Enable dict-like access
-            return conn
-        except sqlite3.OperationalError as e:
-            if attempt < max_retries - 1:
-                print(f"Database connection attempt {attempt + 1} failed: {str(e)}. Retrying in {retry_delay} seconds...")
-                time.sleep(retry_delay)
-                retry_delay *= 2  # Exponential backoff
-            else:
-                print(f"Database connection failed after {max_retries} attempts: {str(e)}")
-                raise
-        except Exception as e:
-            print(f"Unexpected database error: {str(e)}")
-            raise
+    return db_config.get_connection(max_retries, retry_delay)
 
 # Input validation and sanitization utilities
 def validate_email(email):
@@ -203,50 +201,7 @@ def internal_error(error):
 # Database setup
 def init_db():
     """Initialize database with proper error handling"""
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        
-        # Visitors table
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS visitors (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                ip_address TEXT,
-                user_agent TEXT,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-                country TEXT,
-                city TEXT,
-                github_user TEXT,
-                page_visited TEXT,
-                referrer TEXT
-            )
-        ''')
-        
-        # Contact messages table
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS contact_messages (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL,
-                subject TEXT NOT NULL,
-                message TEXT NOT NULL,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-                ip_address TEXT
-            )
-        ''')
-        
-        # Create indexes for better performance
-        cursor.execute('CREATE INDEX IF NOT EXISTS idx_visitors_timestamp ON visitors(timestamp)')
-        cursor.execute('CREATE INDEX IF NOT EXISTS idx_visitors_country ON visitors(country)')
-        cursor.execute('CREATE INDEX IF NOT EXISTS idx_contact_timestamp ON contact_messages(timestamp)')
-        
-        conn.commit()
-        conn.close()
-        print("Database initialized successfully")
-        
-    except Exception as e:
-        print(f"Error initializing database: {str(e)}")
-        raise
+    return db_config.init_database()
 
 # Get visitor info from IP
 def get_visitor_info(ip_address):
@@ -302,18 +257,32 @@ def track_visit():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute('''
-            INSERT INTO visitors (ip_address, user_agent, country, city, github_user, page_visited, referrer)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            ip_address,
-            user_agent,
-            location_info['country'],
-            location_info['city'],
-            github_user,
-            page_visited,
-            referrer
-        ))
+        if db_config.db_type == 'mysql':
+            cursor.execute('''
+                INSERT INTO visitors (ip_address, user_agent, country, city, github_user, page_visited, referrer)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            ''', (
+                ip_address,
+                user_agent,
+                location_info['country'],
+                location_info['city'],
+                github_user,
+                page_visited,
+                referrer
+            ))
+        else:
+            cursor.execute('''
+                INSERT INTO visitors (ip_address, user_agent, country, city, github_user, page_visited, referrer)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                ip_address,
+                user_agent,
+                location_info['country'],
+                location_info['city'],
+                github_user,
+                page_visited,
+                referrer
+            ))
         
         conn.commit()
         conn.close()
@@ -323,12 +292,13 @@ def track_visit():
             'message': 'Visit tracked successfully'
         }), 200
         
-    except sqlite3.Error as e:
-        print(f"Database error in track_visit: {str(e)}")
-        return jsonify({
-            'error': 'Database error occurred',
-            'status': 'error'
-        }), 500
+    except Exception as e:
+        if 'database' in str(e).lower() or 'mysql' in str(e).lower() or 'sqlite' in str(e).lower():
+            print(f"Database error in track_visit: {str(e)}")
+            return jsonify({
+                'error': 'Database error occurred',
+                'status': 'error'
+            }), 500
     except Exception as e:
         print(f"Unexpected error in track_visit: {str(e)}")
         return jsonify({
@@ -337,7 +307,7 @@ def track_visit():
         }), 500
 
 @app.route('/api/contact', methods=['POST'])
-@rate_limit(max_requests=5, window=300)  # 5 requests per 5 minutes for contact form
+@rate_limit(max_requests=10, window=300)  # 10 requests per 5 minutes for contact form
 def send_contact_email():
     try:
         # Validate request content type
@@ -373,10 +343,16 @@ def send_contact_email():
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute('''
-            INSERT INTO contact_messages (name, email, subject, message, ip_address)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (name, email, subject, message, request.remote_addr))
+        if db_config.db_type == 'mysql':
+            cursor.execute('''
+                INSERT INTO contact_messages (name, email, subject, message, ip_address)
+                VALUES (%s, %s, %s, %s, %s)
+            ''', (name, email, subject, message, request.remote_addr))
+        else:
+            cursor.execute('''
+                INSERT INTO contact_messages (name, email, subject, message, ip_address)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (name, email, subject, message, request.remote_addr))
         
         conn.commit()
         conn.close()
@@ -458,12 +434,13 @@ def send_contact_email():
                 'status': 'error'
             }), 500
     
-    except sqlite3.Error as e:
-        print(f"Database error in send_contact_email: {str(e)}")
-        return jsonify({
-            'error': 'Database error occurred',
-            'status': 'error'
-        }), 500
+    except Exception as e:
+        if 'database' in str(e).lower() or 'mysql' in str(e).lower() or 'sqlite' in str(e).lower():
+            print(f"Database error in send_contact_email: {str(e)}")
+            return jsonify({
+                'error': 'Database error occurred',
+                'status': 'error'
+            }), 500
     except Exception as e:
         print(f"Unexpected error in send_contact_email: {str(e)}")
         return jsonify({
@@ -507,27 +484,49 @@ def get_analytics():
         
         # Total visitors
         cursor.execute('SELECT COUNT(*) FROM visitors')
-        total_visitors = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        total_visitors = result[0] if db_config.db_type == 'sqlite' else result['COUNT(*)']
         
         # Visitors by country
-        cursor.execute('SELECT country, COUNT(*) FROM visitors GROUP BY country ORDER BY COUNT(*) DESC LIMIT 10')
-        visitors_by_country = [list(row) for row in cursor.fetchall()]
+        cursor.execute('SELECT country, COUNT(*) as count FROM visitors GROUP BY country ORDER BY count DESC LIMIT 10')
+        visitors_by_country = []
+        for row in cursor.fetchall():
+            if db_config.db_type == 'mysql':
+                visitors_by_country.append([row['country'], row['count']])
+            else:
+                visitors_by_country.append([row[0], row[1]])
         
         # Visitors by page
-        cursor.execute('SELECT page_visited, COUNT(*) FROM visitors GROUP BY page_visited ORDER BY COUNT(*) DESC')
-        visitors_by_page = [list(row) for row in cursor.fetchall()]
+        cursor.execute('SELECT page_visited, COUNT(*) as count FROM visitors GROUP BY page_visited ORDER BY count DESC')
+        visitors_by_page = []
+        for row in cursor.fetchall():
+            if db_config.db_type == 'mysql':
+                visitors_by_page.append([row['page_visited'], row['count']])
+            else:
+                visitors_by_page.append([row[0], row[1]])
         
         # Recent visitors
         cursor.execute('SELECT * FROM visitors ORDER BY timestamp DESC LIMIT 20')
-        recent_visitors = [list(row) for row in cursor.fetchall()]
+        recent_visitors = []
+        for row in cursor.fetchall():
+            if db_config.db_type == 'mysql':
+                recent_visitors.append([
+                    row['id'], row['ip_address'], row['user_agent'], 
+                    str(row['timestamp']), row['country'], row['city'],
+                    row['github_user'], row['page_visited'], row['referrer']
+                ])
+            else:
+                recent_visitors.append(list(row))
         
         # GitHub users
         cursor.execute('SELECT COUNT(*) FROM visitors WHERE github_user IS NOT NULL')
-        github_users = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        github_users = result[0] if db_config.db_type == 'sqlite' else result['COUNT(*)']
         
         # Contact messages
         cursor.execute('SELECT COUNT(*) FROM contact_messages')
-        total_messages = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        total_messages = result[0] if db_config.db_type == 'sqlite' else result['COUNT(*)']
         
         conn.close()
         
@@ -543,18 +542,37 @@ def get_analytics():
             }
         }), 200
     
-    except sqlite3.Error as e:
-        print(f"Database error in get_analytics: {str(e)}")
-        return jsonify({
-            'error': 'Database error occurred',
-            'status': 'error'
-        }), 500
+    except Exception as e:
+        if 'database' in str(e).lower() or 'mysql' in str(e).lower() or 'sqlite' in str(e).lower():
+            print(f"Database error in get_analytics: {str(e)}")
+            return jsonify({
+                'error': 'Database error occurred',
+                'status': 'error'
+            }), 500
     except Exception as e:
         print(f"Unexpected error in get_analytics: {str(e)}")
         return jsonify({
             'error': 'An unexpected error occurred',
             'status': 'error'
         }), 500
+
+# Root path handler
+@app.route('/')
+def root():
+    """Root path handler to provide API information"""
+    return jsonify({
+        'name': 'Portfolio Backend API',
+        'status': 'online',
+        'version': '1.0.0',
+        'endpoints': {
+            'health': '/api/health',
+            'contact': '/api/contact',
+            'analytics': '/api/analytics',
+            'track-visit': '/api/track-visit',
+            'download-resume': '/api/download-resume'
+        },
+        'documentation': 'See README for API documentation'
+    }), 200
 
 # Health check endpoint for deployment monitoring
 @app.route('/api/health')
@@ -567,11 +585,23 @@ def health_check():
         cursor.execute('SELECT 1')
         conn.close()
         
-        return jsonify({
+        # Add CORS headers directly to this response for better debugging
+        response = jsonify({
             'status': 'healthy',
             'timestamp': datetime.now().isoformat(),
-            'version': '1.0.0'
-        }), 200
+            'version': '1.0.0',
+            'cors_config': {
+                'origins': app.config['CORS_ORIGINS'],
+                'env': app.config['FLASK_ENV']
+            }
+        })
+        
+        # Add CORS headers directly to ensure they're present
+        response.headers.add('Access-Control-Allow-Origin', 'https://kiryuchi10.github.io')
+        response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        
+        return response, 200
     except Exception as e:
         return jsonify({
             'status': 'unhealthy',
@@ -579,12 +609,30 @@ def health_check():
             'timestamp': datetime.now().isoformat()
         }), 503
 
+# CORS preflight handler for all API routes
+@app.route('/api/<path:path>', methods=['OPTIONS'])
+def handle_preflight(path):
+    """Handle CORS preflight requests explicitly"""
+    response = jsonify({'status': 'ok'})
+    response.headers.add('Access-Control-Allow-Origin', 'https://kiryuchi10.github.io')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+    response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
+    return response, 200
+
 if __name__ == '__main__':
     # Validate environment variables
     validate_environment()
     
     # Initialize database
     init_db()
+    
+    # Initialize A/B testing tables
+    try:
+        init_ab_testing_tables()
+        print("A/B testing functionality initialized successfully")
+    except Exception as e:
+        print(f"Warning: Failed to initialize A/B testing tables: {str(e)}")
     
     # Run app with environment-specific configuration
     debug_mode = app.config['FLASK_ENV'] != 'production'

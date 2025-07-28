@@ -23,7 +23,7 @@ export const isTest = () => getCurrentEnvironment() === ENV.TEST;
 // Backend URL configuration for different environments
 export const BACKEND_URLS = {
   [ENV.DEVELOPMENT]: 'http://localhost:5000',
-  [ENV.PRODUCTION]: 'https://portfolio-backend-1aqz.onrender.com', // Update this with actual deployed URL
+  [ENV.PRODUCTION]: 'http://localhost:5000', // Using local backend until production is deployed
   [ENV.TEST]: 'http://localhost:5000'
 };
 
