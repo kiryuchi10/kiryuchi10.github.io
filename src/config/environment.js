@@ -23,7 +23,7 @@ export const isTest = () => getCurrentEnvironment() === ENV.TEST;
 // Backend URL configuration for different environments
 export const BACKEND_URLS = {
   [ENV.DEVELOPMENT]: 'http://localhost:5000',
-  [ENV.PRODUCTION]: 'http://localhost:5000', // Using local backend until production is deployed
+  [ENV.PRODUCTION]: 'https://your-backend-url.onrender.com', // Will be updated with actual deployment URL
   [ENV.TEST]: 'http://localhost:5000'
 };
 
@@ -36,6 +36,12 @@ export const getBackendUrl = () => {
   
   // Second priority: Environment-specific default
   const currentEnv = getCurrentEnvironment();
+  
+  // For production, use Netlify Functions as fallback
+  if (currentEnv === ENV.PRODUCTION) {
+    return '/.netlify/functions';
+  }
+  
   if (BACKEND_URLS[currentEnv]) {
     return BACKEND_URLS[currentEnv];
   }

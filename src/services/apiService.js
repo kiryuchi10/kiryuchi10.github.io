@@ -201,7 +201,15 @@ export const apiService = {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.CONNECTION_TEST.TIMEOUT);
 
-      const response = await fetch(`${apiClient.baseURL}${API_CONFIG.ENDPOINTS.HEALTH}`, {
+      // Try health endpoint first, fallback to analytics for Netlify Functions
+      let testUrl = `${apiClient.baseURL}${API_CONFIG.ENDPOINTS.HEALTH}`;
+      
+      // If using Netlify Functions, test analytics endpoint instead
+      if (apiClient.baseURL.includes('netlify/functions')) {
+        testUrl = `${apiClient.baseURL}${API_CONFIG.ENDPOINTS.ANALYTICS}`;
+      }
+
+      const response = await fetch(testUrl, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

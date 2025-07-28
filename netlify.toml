@@ -1,73 +1,49 @@
 [build]
   publish = "build"
   command = "npm run build"
-  ignore = "backend/"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
-  NPM_VERSION = "9"
 
+# Redirect API calls to Netlify Functions
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+[[redirects]]
+  from = "/api/analytics"
+  to = "/.netlify/functions/analytics"
+  status = 200
+
+[[redirects]]
+  from = "/api/track-visit"
+  to = "/.netlify/functions/track-visit"
+  status = 200
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+# Handle client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.images]
-  compress = true
-
-# Headers for security and performance
+# Headers for CORS
 [[headers]]
-  for = "/*"
+  for = "/api/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://coff.ee https://www.buymeacoffee.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-src https://coff.ee https://www.buymeacoffee.com;"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
 
 [[headers]]
-  for = "/static/*"
+  for = "/.netlify/functions/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.woff2"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Environment variables for different deploy contexts
-[context.production.environment]
-  NODE_ENV = "production"
-  REACT_APP_API_URL = "https://your-backend-api.com"
-
-[context.deploy-preview.environment]
-  NODE_ENV = "development"
-  REACT_APP_API_URL = "https://your-staging-api.com"
-
-[context.branch-deploy.environment]
-  NODE_ENV = "development"
-  REACT_APP_API_URL = "http://localhost:5000"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
