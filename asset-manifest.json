@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6077feec.css",
-    "main.js": "/static/js/main.da019631.js",
+    "main.css": "/static/css/main.caf9c247.css",
+    "main.js": "/static/js/main.076db8e3.js",
     "static/media/falling-stars-stars.gif": "/static/media/falling-stars-stars.540aeee9fe6b0a8f1a88.gif",
     "static/media/KakaoTalk_20250708_231845951.jpg": "/static/media/KakaoTalk_20250708_231845951.2a5cb6d6149d204fa073.jpg",
     "static/media/DHL_avatar.jpg": "/static/media/DHL_avatar.27d0ef5aff6f546040a9.jpg",
@@ -10,11 +10,11 @@
     "static/media/family_app.jpg": "/static/media/family_app.313fc0c699a3d2d78cf7.jpg",
     "static/media/pixel_art.jpeg": "/static/media/pixel_art.af3b733b2a28db8a0f5f.jpeg",
     "index.html": "/index.html",
-    "main.6077feec.css.map": "/static/css/main.6077feec.css.map",
-    "main.da019631.js.map": "/static/js/main.da019631.js.map"
+    "main.caf9c247.css.map": "/static/css/main.caf9c247.css.map",
+    "main.076db8e3.js.map": "/static/js/main.076db8e3.js.map"
   },
   "entrypoints": [
-    "static/css/main.6077feec.css",
-    "static/js/main.da019631.js"
+    "static/css/main.caf9c247.css",
+    "static/js/main.076db8e3.js"
   ]
 }
