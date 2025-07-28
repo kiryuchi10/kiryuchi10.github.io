@@ -90,3 +90,6 @@ __pycache__/
 # SQLite or local DB
 *.sqlite3
 *.db
+
+# Local Netlify folder
+.netlify
