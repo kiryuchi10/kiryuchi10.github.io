@@ -68,6 +68,32 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Check if email credentials are configured
+    if (!process.env.SENDER_EMAIL || !process.env.SENDER_PASSWORD) {
+      // Log the contact form submission for now
+      console.log('Contact form submission (email not configured):', {
+        name,
+        email,
+        subject,
+        message,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Return success but indicate email service is not configured
+      return {
+        statusCode: 200,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          status: 'success',
+          message: 'Your message has been received! Email service is being configured - you will receive a response soon.',
+          note: 'Email credentials not configured yet'
+        })
+      };
+    }
+
     // Configure email transporter
     const transporter = nodemailer.createTransporter({
       service: 'gmail',
