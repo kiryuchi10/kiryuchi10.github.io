@@ -18,7 +18,7 @@ function ContactForm() {
     setNotifications(prev => prev.filter(n => n.id !== id));
   }, []);
 
-  const handleSuccess = useCallback((response) => {
+  const handleSuccess = useCallback(() => {
     // Hide fallback button on successful submission
     setShowEmailFallback(false);
     
@@ -186,7 +186,7 @@ function ContactForm() {
                 )}
               </div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Info Side */}
           <motion.div 
