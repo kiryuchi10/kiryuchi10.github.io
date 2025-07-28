@@ -72,7 +72,8 @@ export const ENV_CONFIG = {
   backendUrl: getBackendUrl(),
   frontendUrl: getFrontendUrl(),
   apiUrl: process.env.REACT_APP_API_URL,
-  buildTime: new Date().toISOString()
+  buildTime: new Date().toISOString(),
+  buildVersion: '0.1.1-' + Date.now()
 };
 
 export default ENV_CONFIG;
