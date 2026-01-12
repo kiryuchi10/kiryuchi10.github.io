@@ -118,3 +118,7 @@ __pycache__/
 *.secret
 *.crt
 *.cert
+
+# Build output
+build/
+
