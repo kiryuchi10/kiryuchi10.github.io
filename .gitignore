@@ -1,60 +1,62 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
+# ================================
+# Dependencies
+# ================================
+node_modules/
+.pnp/
 .pnp.js
 
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Dependency folders
-node_modules/
+# ================================
+# Build outputs
+# ================================
 build/
 dist/
+out/
 .cache/
 .next/
-out/
 coverage/
+.netlify/
 
-# Build output from React / Tauri / Vite
+# ================================
+# Logs
+# ================================
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Private env files
+# ================================
+# Environment variables (PRIVATE)
+# ================================
 .env
 .env.local
 .env.development
 .env.production
+.env.test
 .env.*.local
 
-# IDE files
+# ================================
+# Markdown / docs (ignore except README)
+# ================================
+*.md
+!README.md
+
+# ================================
+# IDE / Editor
+# ================================
 .vscode/
 .idea/
 *.swp
 
-# System files
+# ================================
+# OS files
+# ================================
 .DS_Store
 Thumbs.db
 
-# Static assets (optional: only ignore raw user uploads or very large assets)
+# ================================
+# Media / large assets (optional)
+# ================================
 *.mp4
 *.mov
 *.avi
@@ -67,14 +69,20 @@ Thumbs.db
 *.tmp
 *.orig
 
-# GitHub Pages branch (if using gh-pages deployment)
+# ================================
+# GitHub Pages deploy branch
+# ================================
 gh-pages/
 
-# OS-specific
+# ================================
+# OS binaries
+# ================================
 *.exe
 *.dll
 
-# Personal scripts and credentials
+# ================================
+# Secrets / certificates
+# ================================
 *.key
 *.pem
 *.crt
@@ -83,13 +91,30 @@ gh-pages/
 *.pfx
 *.secret
 
-# Python (if used for backend)
+# ================================
+# Python (if backend exists)
+# ================================
 __pycache__/
 *.pyc
+*.pyo
 
-# SQLite or local DB
+# ================================
+# Local databases
+# ================================
 *.sqlite3
 *.db
 
-# Local Netlify folder
-.netlify
+# Docs (do not commit)
+*.md
+!README.md
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.secret
+*.crt
+*.cert
