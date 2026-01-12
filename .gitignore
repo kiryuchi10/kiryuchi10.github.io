@@ -122,3 +122,24 @@ __pycache__/
 # Build output
 build/
 
+# dependencies
+node_modules/
+
+# build output
+build/
+static/
+
+# netlify local
+.netlify/
+
+# misc
+.DS_Store
+.env
+.env.*
+node_modules/
+build/
+static/
+.netlify/
+.env
+.env.*
+
