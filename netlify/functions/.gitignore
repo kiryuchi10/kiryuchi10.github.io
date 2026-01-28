@@ -1,0 +1,13 @@
+# Dependencies – installed at build
+node_modules/
+
+# Security – never commit
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.secret
+
+# Logs
+*.log

@@ -41,6 +41,40 @@ export const getBrowserLocation = () => {
       return;
     }
 
+    // Avoid triggering a browser permission prompt automatically.
+    // Only attempt geolocation if permission is already granted.
+    if (navigator.permissions?.query) {
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((status) => {
+          if (status.state !== 'granted') {
+            resolve(null);
+            return;
+          }
+
+          const options = {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 300000 // 5 minutes
+          };
+
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              resolve({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                accuracy: position.coords.accuracy
+              });
+            },
+            () => resolve(null),
+            options
+          );
+        })
+        .catch(() => resolve(null));
+
+      return;
+    }
+
     const options = {
       enableHighAccuracy: false,
       timeout: 5000,

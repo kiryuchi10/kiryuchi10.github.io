@@ -1,12 +1,30 @@
 # ================================
+# Security – never commit
+# ================================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+*.key
+*.pem
+*.crt
+*.cert
+*.p12
+*.pfx
+*.secret
+secrets/
+
+# ================================
 # Dependencies
 # ================================
 node_modules/
-.pnp/
+.pnp
 .pnp.js
 
 # ================================
-# Build outputs
+# Build / output
 # ================================
 build/
 dist/
@@ -17,29 +35,17 @@ coverage/
 .netlify/
 
 # ================================
-# Logs
+# Logs and dev process files
 # ================================
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# ================================
-# Environment variables (PRIVATE)
-# ================================
-.env
-.env.local
-.env.development
-.env.production
-.env.test
-.env.*.local
-
-# ================================
-# Markdown / docs (ignore except README)
-# ================================
-*.md
-!README.md
+*.tmp
+*.temp
+*.bak
+*.orig
 
 # ================================
 # IDE / Editor
@@ -47,99 +53,48 @@ pnpm-debug.log*
 .vscode/
 .idea/
 *.swp
+*.swo
+.project
+.classpath
+.settings/
 
 # ================================
-# OS files
+# OS
 # ================================
 .DS_Store
 Thumbs.db
-
-# ================================
-# Media / large assets (optional)
-# ================================
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.zip
-*.tar
-*.tar.gz
-*.7z
-*.bak
-*.tmp
-*.orig
-
-# ================================
-# GitHub Pages deploy branch
-# ================================
-gh-pages/
-
-# ================================
-# OS binaries
-# ================================
 *.exe
 *.dll
 
 # ================================
-# Secrets / certificates
+# Docs – allow only README.md
 # ================================
-*.key
-*.pem
-*.crt
-*.cert
-*.p12
-*.pfx
-*.secret
+*.md
+!README.md
 
 # ================================
-# Python (if backend exists)
+# Python (backend)
 # ================================
 __pycache__/
 *.pyc
 *.pyo
+*.py[cod]
+.Python
+venv/
+.venv/
+env/
 
 # ================================
-# Local databases
+# Local DB / large binaries
 # ================================
 *.sqlite3
 *.db
+*.zip
+*.tar
+*.tar.gz
+*.7z
 
-# Docs (do not commit)
-*.md
-!README.md
-
-# Secrets
-.env
-.env.*
-*.pem
-*.key
-*.p12
-*.pfx
-*.secret
-*.crt
-*.cert
-
-# Build output
-build/
-
-# dependencies
-node_modules/
-
-# build output
-build/
-static/
-
-# netlify local
-.netlify/
-
-# misc
-.DS_Store
-.env
-.env.*
-node_modules/
-build/
-static/
-.netlify/
-.env
-.env.*
-
+# ================================
+# Deploy / branch
+# ================================
+gh-pages/

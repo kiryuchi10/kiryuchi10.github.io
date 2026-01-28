@@ -83,6 +83,14 @@ function Analytics() {
     fetchAnalytics();
   }, [retryCount]);
 
+  // Auto-refresh to feel "realtime" (polling)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchAnalytics();
+    }, 10000); // 10s
+    return () => clearInterval(interval);
+  }, []);
+
   if (loading) {
     return (
       <div className="analytics-container">
