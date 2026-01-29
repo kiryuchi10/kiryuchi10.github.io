@@ -1,0 +1,112 @@
+.sun-moon-orb-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sun-moon-orb {
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sun-moon-orb--sun {
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff 0%,
+    #fff8e0 8%,
+    #ffd54f 25%,
+    #ffb300 50%,
+    #ff8f00 75%,
+    #e65100 100%
+  );
+  box-shadow:
+    0 0 0 4px rgba(255, 212, 0, 0.15),
+    0 0 0 12px rgba(255, 212, 0, 0.08),
+    0 0 20px rgba(255, 235, 59, 0.5),
+    0 0 40px rgba(255, 193, 7, 0.35),
+    0 0 60px rgba(255, 152, 0, 0.2);
+  animation: sun-glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes sun-glow-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(255, 212, 0, 0.15),
+      0 0 0 12px rgba(255, 212, 0, 0.08),
+      0 0 20px rgba(255, 235, 59, 0.5),
+      0 0 40px rgba(255, 193, 7, 0.35),
+      0 0 60px rgba(255, 152, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(255, 212, 0, 0.2),
+      0 0 0 18px rgba(255, 212, 0, 0.1),
+      0 0 28px rgba(255, 235, 59, 0.6),
+      0 0 50px rgba(255, 193, 7, 0.45),
+      0 0 80px rgba(255, 152, 0, 0.25);
+  }
+}
+
+.sun-moon-orb--moon {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #e8e8e8 0%,
+    #b0b8c4 30%,
+    #7d8a9a 60%,
+    #4a5568 100%
+  );
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.1),
+    0 0 15px rgba(176, 184, 196, 0.4),
+    0 0 35px rgba(125, 138, 154, 0.25),
+    inset -3px -3px 8px rgba(0, 0, 0, 0.2),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.15);
+  animation: moon-glow-subtle 4s ease-in-out infinite;
+}
+
+@keyframes moon-glow-subtle {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.1),
+      0 0 15px rgba(176, 184, 196, 0.4),
+      0 0 35px rgba(125, 138, 154, 0.25),
+      inset -3px -3px 8px rgba(0, 0, 0, 0.2),
+      inset 2px 2px 6px rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.12),
+      0 0 20px rgba(176, 184, 196, 0.5),
+      0 0 45px rgba(125, 138, 154, 0.3),
+      inset -3px -3px 8px rgba(0, 0, 0, 0.2),
+      inset 2px 2px 6px rgba(255, 255, 255, 0.15);
+  }
+}
+
+.sun-moon-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.sun-moon-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.sun-moon-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}

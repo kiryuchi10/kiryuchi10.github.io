@@ -4,7 +4,7 @@ import avatar from "../assets/DHL_avatar.jpg"; // Make sure this exists
 
 const Hero = () => {
   return (
-    <section style={{ backgroundColor: "#0f0f0f", padding: "4rem 2rem" }}>
+    <section id="home" style={{ backgroundColor: "#0f0f0f", padding: "4rem 2rem" }}>
       <h1 style={{ color: "#fff", fontSize: "2rem", textAlign: "center", marginBottom: "2rem" }}>
         Welcome to My Flipbook Portfolio
       </h1>

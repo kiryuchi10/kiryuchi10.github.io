@@ -1,0 +1,300 @@
+/* Buy Me a Coffee – floating, inline, card (right side; Chat left) */
+
+.buymeacoffee-fab.bmc-floating-button {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 9998;
+  cursor: pointer;
+}
+
+.bmc-floating-button.default {
+  background: linear-gradient(135deg, #ffdd00 0%, #fbb034 100%);
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(251, 176, 52, 0.4);
+}
+
+.bmc-floating-button.dark {
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.bmc-floating-button.minimal {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #ffdd00;
+  border-radius: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.bmc-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  text-decoration: none;
+  position: relative;
+}
+
+.bmc-icon {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.bmc-floating-button:hover .bmc-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.bmc-tooltip {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.bmc-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.85);
+}
+
+.bmc-inline-button {
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.bmc-inline-button.default {
+  background: linear-gradient(135deg, #ffdd00 0%, #fbb034 100%);
+  border-radius: 25px;
+  box-shadow: 0 2px 10px rgba(251, 176, 52, 0.3);
+}
+
+.bmc-inline-button.dark {
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border-radius: 25px;
+}
+
+.bmc-inline-button.minimal {
+  background: transparent;
+  border: 2px solid #ffdd00;
+  border-radius: 25px;
+}
+
+.bmc-inline-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bmc-inline-content {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 8px;
+}
+
+.bmc-inline-icon {
+  font-size: 18px;
+}
+
+.bmc-inline-text {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.bmc-inline-button.dark .bmc-inline-text {
+  color: #fff;
+}
+
+.bmc-card {
+  max-width: 400px;
+  margin: 20px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.bmc-card:hover {
+  transform: translateY(-3px);
+}
+
+.bmc-card.default {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bmc-card.dark {
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.bmc-card.minimal {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #ffdd00;
+}
+
+.bmc-card-header {
+  text-align: center;
+  padding: 30px 20px 20px;
+  background: linear-gradient(135deg, #ffdd00 0%, #fbb034 100%);
+  color: #333;
+}
+
+.bmc-card.dark .bmc-card-header {
+  background: linear-gradient(135deg, #404040 0%, #2c2c2c 100%);
+  color: #fff;
+}
+
+.bmc-card-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  animation: bmc-bounce 2s infinite;
+}
+
+@keyframes bmc-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.bmc-card-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.bmc-card-content {
+  padding: 30px 20px;
+}
+
+.bmc-card-content p {
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+.bmc-card.dark .bmc-card-content p {
+  color: #ccc;
+}
+
+.bmc-benefits {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.bmc-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.bmc-benefit-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.bmc-benefit span:last-child {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+.bmc-card.dark .bmc-benefit span:last-child {
+  color: #aaa;
+}
+
+.bmc-card-footer {
+  padding: 0 20px 30px;
+  text-align: center;
+}
+
+.bmc-card-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #ffdd00 0%, #fbb034 100%);
+  color: #333;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(251, 176, 52, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 15px;
+}
+
+.bmc-card-button:hover {
+  box-shadow: 0 6px 20px rgba(251, 176, 52, 0.4);
+  transform: translateY(-2px);
+  color: #333;
+}
+
+.bmc-button-icon {
+  font-size: 18px;
+}
+
+.bmc-card-note {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.bmc-card.dark .bmc-card-note {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .bmc-floating-button {
+    bottom: 20px;
+    right: 20px;
+  }
+  .bmc-link {
+    width: 50px;
+    height: 50px;
+  }
+  .bmc-icon {
+    font-size: 20px;
+  }
+  .bmc-tooltip {
+    right: 60px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .bmc-card {
+    margin: 20px 10px;
+    max-width: calc(100% - 20px);
+  }
+  .bmc-benefits {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .bmc-benefit {
+    flex-direction: row;
+    justify-content: center;
+  }
+}

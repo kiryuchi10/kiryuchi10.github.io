@@ -18,4 +18,17 @@
   .download-btn:hover {
     background-color: #0056b3;
   }
-  
+
+  .resume-view-link {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .resume-view-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .resume-view-link a:hover {
+    text-decoration: underline;
+  }

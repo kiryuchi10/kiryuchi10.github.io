@@ -20,11 +20,12 @@ export const isDevelopment = () => getCurrentEnvironment() === ENV.DEVELOPMENT;
 export const isProduction = () => getCurrentEnvironment() === ENV.PRODUCTION;
 export const isTest = () => getCurrentEnvironment() === ENV.TEST;
 
-// Backend URL configuration for different environments
+// Backend URL — OPTION A: Netlify Functions (serverless, same site)
+// No separate backend domain; API lives under same Netlify site via netlify.toml redirects.
 export const BACKEND_URLS = {
-  [ENV.DEVELOPMENT]: 'http://localhost:5000',
-  [ENV.PRODUCTION]: 'https://your-backend-url.onrender.com', // Will be updated with actual deployment URL
-  [ENV.TEST]: 'http://localhost:5000'
+  [ENV.DEVELOPMENT]: 'http://localhost:8888', // netlify dev (app + functions on 8888)
+  [ENV.PRODUCTION]: '',                        // SAME ORIGIN — /api/* → /.netlify/functions/*
+  [ENV.TEST]: 'http://localhost:8888',
 };
 
 // Get backend URL with fallback logic
@@ -38,23 +39,18 @@ export const getBackendUrl = () => {
   const currentEnv = getCurrentEnvironment();
   
   /**
-   * Production default:
-   * - When deployed on Netlify, we use same-origin `/api/*` routes
-   *   and let `netlify.toml` redirects forward to `/.netlify/functions/*`.
-   * - This avoids building URLs like `/.netlify/functions/api/analytics` (404).
-   *
-   * If you deploy a separate backend (Render/Fly/etc), set REACT_APP_API_URL
-   * to that origin (e.g. https://my-api.onrender.com).
+   * Production: same origin (''). Fetch `/api/contact` etc. — netlify.toml
+   * redirects to /.netlify/functions/*. No CORS, no env mismatch, no hardcoded domain.
+   * Development: netlify dev runs app + functions on 8888; use '' for same-origin
+   * or leave REACT_APP_API_URL unset to use BACKEND_URLS.development (8888).
+   * For external backend (Render/Fly), set REACT_APP_API_URL to that origin.
    */
   if (currentEnv === ENV.PRODUCTION) {
     return '';
   }
-  
   if (BACKEND_URLS[currentEnv]) {
     return BACKEND_URLS[currentEnv];
   }
-  
-  // Fallback to production URL
   return BACKEND_URLS[ENV.PRODUCTION];
 };
 

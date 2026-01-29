@@ -98,3 +98,6 @@ env/
 # Deploy / branch
 # ================================
 gh-pages/
+
+# Reference design (extracted zip)
+rafi-reference/

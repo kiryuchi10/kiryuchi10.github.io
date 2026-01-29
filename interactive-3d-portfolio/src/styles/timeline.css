@@ -1,0 +1,139 @@
+/* Journey timeline: center line + orb + alternating left/right */
+
+.journey-section-inner {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.journey-heading {
+  font-size: 1.75rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.timeline-wrap {
+  position: relative;
+  padding: 30px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 1px;
+}
+
+.timeline-orb {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow:
+    0 0 22px rgba(255, 212, 0, 0.75),
+    0 0 70px rgba(255, 212, 0, 0.35),
+    0 0 140px rgba(255, 212, 0, 0.2);
+  pointer-events: none;
+}
+
+.timeline-items {
+  display: grid;
+  grid-template-columns: 1fr 90px 1fr;
+  row-gap: 44px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item--left {
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 18px;
+}
+
+.timeline-item--right {
+  grid-column: 3 / 4;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 18px;
+}
+
+.timeline-card {
+  width: min(480px, 42vw);
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  background: rgba(12, 12, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+}
+
+.timeline-period {
+  color: #b58cff;
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.timeline-title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.timeline-desc {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.timeline-bullets {
+  margin: 0.35rem 0 0;
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.4;
+  list-style: disc;
+}
+
+.timeline-bullets li {
+  margin-bottom: 0.15rem;
+}
+
+.journey-subtitle {
+  margin: 2rem 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .timeline-items {
+    grid-template-columns: 1fr;
+  }
+  .timeline-line {
+    left: 18px;
+    transform: none;
+  }
+  .timeline-orb {
+    left: 18px;
+    transform: translate(-50%, -50%);
+  }
+  .timeline-item--left,
+  .timeline-item--right {
+    grid-column: 1;
+    justify-content: flex-start;
+    padding: 0 0 0 38px;
+  }
+  .timeline-card {
+    width: 100%;
+  }
+}
