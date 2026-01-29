@@ -1,8 +1,7 @@
 [build]
-  base = "interactive-3d-portfolio"
-  publish = "dist"
-  command = "npm ci && npm run build"
-  functions = "../netlify/functions"
+  publish = "interactive-3d-portfolio/dist"
+  command = "cd interactive-3d-portfolio && npm install && npm run build"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
