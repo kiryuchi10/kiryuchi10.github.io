@@ -46,7 +46,9 @@
 .timeline-items {
   display: grid;
   grid-template-columns: 1fr 90px 1fr;
-  row-gap: 44px;
+  grid-auto-rows: auto;
+  row-gap: 2rem;
+  align-items: start;
 }
 
 .timeline-item {
@@ -135,5 +137,25 @@
   }
   .timeline-card {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .journey-section-inner {
+    width: min(100%, 92vw);
+  }
+  .timeline-wrap {
+    padding: 20px 0;
+  }
+  .timeline-item--left,
+  .timeline-item--right {
+    padding-left: 32px;
+  }
+  .timeline-card {
+    padding: 14px 12px;
+  }
+  .timeline-orb {
+    width: 40px;
+    height: 40px;
   }
 }

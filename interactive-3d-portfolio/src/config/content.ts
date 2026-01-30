@@ -1,6 +1,6 @@
 /**
  * Portfolio content: Dong Hyeun Lee
- * Resume: Metrology Process Engineer (Samsung Austin Semiconductor)
+ * Positioning: AiX Engineer (AI + Physical Systems)
  * PDFs: place in public/resume/ for download links
  */
 
@@ -16,12 +16,16 @@ export const basics = {
 
 export const hero = {
   intro:
-    'Full-Stack & Automation Engineer | AI for Vision-Based Physical Systems | Python, Java, React, FastAPI | U.S. Permanent Resident',
+    'AiX Engineer (AI + Physical Systems) | Automation & Reliability | Python, Java, React, FastAPI | U.S. Permanent Resident',
   headline: "I'm",
   nameHighlight: 'DongHyeun Lee',
   ctaResume: {
     label: 'Download Resume',
-    href: '/resume/DONGHYEUN_LEE_Metrology_Equipment_Engineer_Samsung_Resume.pdf',
+    href: '/resume/DONGHYEUN%20LEE_SAS_Metrology%20Process%20Engineer_Resume.pdf',
+  },
+  ctaCv: {
+    label: 'Download CV',
+    href: '/resume/DONGHYEUN%20LEE_SAS_Metrology%20Process%20Engineer_Coverletter.pdf',
   },
   ctaProjects: { label: 'View Projects', scrollToId: 'projects' },
 };
@@ -29,22 +33,39 @@ export const hero = {
 export const about = {
   title: 'About',
   summary:
-    'Metrology Process Engineer with an M.S. in Chemistry and hands-on experience in imaging-based metrology, statistical data analysis, calibration, and yield improvement for semiconductor-adjacent and advanced materials systems.',
+    'AiX Engineer specializing in the integration of wet-lab analytical instruments, manufacturing devices, and dry-lab data systems. Experienced in bridging physical measurements—imaging, spectroscopy, and precision dispensing—with in-silico analysis, automation pipelines, and decision-ready dashboards. Strong background in translating real-world process signals into reliable, scalable software workflows for manufacturing and R&D environments.',
 };
 
 export const resume = {
   summary:
-    'Metrology Process Engineer with an M.S. in Chemistry and hands-on experience in imaging-based metrology, statistical data analysis, calibration, and yield improvement for semiconductor-adjacent and advanced materials systems. Strong background in optical imaging, SEM/AFM, spectrometry, dimensional mapping, and RCA, with proven ability to translate measurement data into actionable process feedback in cleanroom/manufacturing environments.',
+    'AiX Engineer (AI + Physical Systems) with an M.S. in Chemistry and hands-on experience across wet labs, manufacturing devices, and dry-lab automation. Experienced in operating and interpreting data from analytical instruments (HPLC, UV-Vis, XPS, XRD, SEM/FIB-SEM) and integrating vision-based inspection, precision dispensing, and liquid handling systems into data-driven workflows. Strong capability in in-silico analysis, image processing, statistical monitoring, and automation pipelines that convert physical signals into actionable process intelligence for manufacturing and reliability-focused environments.',
+
   summaryNote:
     '(Interview Finalist: Samsung, ASML, Otsuka | Offer: SK Battery America)',
 
   coreSkills: [
-    'Process & Metrology Monitoring',
-    'Statistical Methods & Data Analysis',
-    'Technical Presentations',
-    'SEM (imaging optimization, defect analysis)',
-    'Defect classification, RCA, process feedback loops',
-    'AFM, Ellipsometry, UV-Vis, Optical Microscopy',
+    // AiX Core
+    'AiX Engineering: AI + Physical Systems Integration',
+    'End-to-End Automation: Measurement → Analysis → Feedback',
+    'Manufacturing Reliability & Root Cause Analysis',
+
+    // Wet Lab / Analytical
+    'Analytical Instruments: HPLC, UV-Vis, XPS, XRD',
+    'Microscopy: Optical, SEM, FIB-SEM, AFM',
+    'Surface & Materials Characterization',
+    'Calibration, Repeatability, Measurement Validation',
+
+    // Manufacturing Devices
+    'Vision-Based Inspection & Imaging Systems',
+    'Precision Dispensing (Piezo Dispensers)',
+    'Liquid Handling Systems (Gilson, PipetMax)',
+    'Manufacturing Equipment Signal Interpretation',
+
+    // Dry Lab / Software
+    'In-Silico Analysis & Modeling',
+    'Image Processing & Feature Extraction (Python, ImageJ, MATLAB)',
+    'Statistical Analysis & SPC/FDC Concepts',
+    'Automation APIs & Dashboards (FastAPI, React, SQL)',
   ],
 
   experience: [
@@ -54,11 +75,11 @@ export const resume = {
       location: 'Seoul, Korea',
       dates: '2021 – 2023',
       bullets: [
-        'Developed wet clean and surface activation flows (piranha, plasma) for reproducible pre-functionalization control.',
-        'Executed imaging-based metrology (TIRF, optical) with Cr-grid standards for dimensional calibration and FOV uniformity.',
-        'Built statistical analysis pipelines (Python/MATLAB) for signal stability, drift detection, and repeatability metrics.',
-        'Integrated AFM, optical microscopy, UV-Vis, ellipsometry for fast cross-tool validation and RCA.',
-        'Applied SPC, control charts, and R&R to nano-scale surface processes; correlated treatment conditions with thickness and optical response.',
+        'Operated and analyzed wet-lab analytical instruments including UV-Vis, ellipsometry, AFM, and optical microscopy to characterize surface and signal behavior.',
+        'Executed imaging-based metrology workflows using calibrated grid standards to ensure dimensional accuracy, field-of-view uniformity, and repeatability.',
+        'Integrated vision-based inspection data with in-silico analysis pipelines (Python/MATLAB) for drift detection, signal stability tracking, and anomaly identification.',
+        'Supported manufacturing-style workflows by correlating wet clean and plasma surface treatments with downstream measurement signals and yield impact.',
+        'Built automation-ready datasets bridging wet-lab measurements, image-derived features, and statistical monitoring outputs.',
       ],
     },
     {
@@ -67,8 +88,9 @@ export const resume = {
       location: 'Seoul, Korea',
       dates: '2020 – 2021',
       bullets: [
-        'Supported sensor manufacturing QA via defect analysis, signal instability diagnostics, and yield loss investigation.',
-        'Performed reliability-focused analysis in time-critical, quality-driven manufacturing environments.',
+        'Supported sensor and device manufacturing QA using defect evidence from optical and SEM-based inspections.',
+        'Worked with precision dispensing and liquid handling workflows to diagnose variability sources affecting signal quality.',
+        'Performed rapid, reliability-focused analyses under production timelines, translating raw device behavior into structured failure hypotheses.',
       ],
     },
     {
@@ -77,18 +99,10 @@ export const resume = {
       location: 'Seoul, Korea',
       dates: '2018 – 2020',
       bullets: [
-        'Generated micro/nano-scale datasets from surface-engineered polymer systems.',
-        'Performed optical signal extraction and image-based feature analysis (ImageJ, MATLAB, Python).',
-        'Fabricated micro/nano structures via photolithography, resist processing, plasma treatment, and wet chemistry.',
-      ],
-    },
-    {
-      role: 'Offer Accepted – Manufacturing Innovation Engineer',
-      company: 'SK Battery America (SKBA)',
-      location: 'Commerce, GA',
-      dates: 'Start: TBA',
-      bullets: [
-        'Selected for SPC/FDC-driven manufacturing innovation program targeting AI-based defect detection and yield optimization.',
+        'Generated micro/nano-scale datasets from polymer and surface-engineered systems using photolithography, plasma processing, and wet chemistry.',
+        'Performed image-based signal extraction and feature quantification using ImageJ, MATLAB, and Python.',
+        'Applied XPS and XRD to correlate material structure with optical, chemical, and functional responses.',
+        'Developed in-silico analysis workflows to interpret experimental data and guide next-step fabrication and testing.',
       ],
     },
   ],
@@ -114,31 +128,21 @@ export const resume = {
   ],
 
   pdfUrl:
-    '/resume/DONGHYEUN_LEE_Metrology_Equipment_Engineer_Samsung_Resume.pdf',
+    '/resume/DONGHYEUN%20LEE_SAS_Metrology%20Process%20Engineer_Resume.pdf',
 };
 
 export const coverLetter = {
   targetRole: 'Metrology Process Engineer — Samsung Austin Semiconductor',
-  pdfUrl: '/resume/DongHyeun_Lee_Samsung_Metrology_Cover_Letter.pdf',
-  paragraphs: [
-    'I am writing to apply for the Metrology Process Engineer position at Samsung Austin Semiconductor...',
-    'In my most recent role as a Senior Research Engineer at Proteina Inc...',
-    'I established offline and inline characterization workflows...',
-    'A key part of my role involved statistical interpretation...',
-    'Earlier in my career at Palogen LLC...',
-    'I am particularly drawn to this role...',
-    'Thank you for your time and consideration...',
-  ],
-  signOff: 'Sincerely,\nDong Hyeun Lee',
+  pdfUrl: '/resume/DONGHYEUN%20LEE_SAS_Metrology%20Process%20Engineer_Coverletter.pdf',
 };
 
 export const skills = [
-  { name: 'Process & Metrology', level: 90 },
-  { name: 'Python / MATLAB', level: 88 },
-  { name: 'Statistical Data Analysis', level: 85 },
-  { name: 'React / Java', level: 80 },
-  { name: 'SEM / AFM / Optical', level: 85 },
-  { name: 'FastAPI / Automation', level: 75 },
+  { name: 'AiX Systems & Automation', level: 90 },
+  { name: 'Wet Lab & Analytical Instruments', level: 88 },
+  { name: 'Manufacturing Devices & Vision', level: 85 },
+  { name: 'In-Silico & Image Analysis', level: 88 },
+  { name: 'Python / MATLAB', level: 90 },
+  { name: 'React / FastAPI / Java', level: 80 },
 ];
 
 /** Project card images */
@@ -148,7 +152,7 @@ export const projects = [
   {
     title: 'AI/ML BMS System',
     description:
-      'Real-time monitoring dashboard for battery modules and sensor data (voltage, SoC, temperature, alarms). One-page scroll + backend.',
+      'Real-time monitoring dashboard for battery modules and sensor data (voltage, SoC, temperature, alarms) with automation-ready backend pipelines.',
     badges: ['PostgreSQL', 'FastAPI', 'Vite', 'TypeScript', 'Three.js', 'AI/ML'],
     image: '/assets/DongHyeunLee/Project/Video/녹음-2026-01-30-044543-aimlbms.gif',
     link: 'https://github.com/kiryuchi10/aiml-bms-system/tree/one-page-scroll-website/backend',
@@ -156,7 +160,7 @@ export const projects = [
   {
     title: 'SCM System — AI Tools',
     description:
-      'AI-powered supply chain tools: demand forecasting, AI assistant, and insights.',
+      'AI-powered supply chain tools including demand forecasting, AI assistant, and analytics dashboards.',
     badges: ['React', 'Flask', 'AI/ML'],
     image: `${PROJECT_IMAGE_BASE}/scm_app.png`,
     link: 'https://github.com/kiryuchi10/SCM-apps',
@@ -164,16 +168,16 @@ export const projects = [
   {
     title: 'Pixel Art Generator',
     description:
-      'Convert photo to pixel art with before/after comparison.',
-    badges: ['React', 'FastAPI', 'Pillow'],
+      'Vision-based image transformation pipeline converting photos into pixel art with before/after analysis.',
+    badges: ['React', 'FastAPI', 'Pillow', 'Image Processing'],
     image: `${PROJECT_IMAGE_BASE}/pixel_art.jpeg`,
     link: 'https://github.com/kiryuchi10/pixel-art-generator',
   },
   {
     title: 'Family Expenditure Tracker',
     description:
-      'Personal finance app with bank JSON ingestion and spending analytics.',
-    badges: ['React', 'Finance', 'Data'],
+      'Personal finance analytics app with automated bank JSON ingestion and visualization.',
+    badges: ['React', 'Data', 'Finance'],
     image: `${PROJECT_IMAGE_BASE}/family_app.jpg`,
     link: 'https://github.com/kiryuchi10/family-expenditure-app',
   },
@@ -207,8 +211,8 @@ export const contact = {
   sendingLabel: 'Sending...',
   formTitle: 'Get in touch',
   infoTitle: 'Contact info',
-  address: 'Austin, Tx & Commerce, GA',
-  phone: '+512 731 2449',
+  address: 'Austin, TX & Commerce, GA',
+  phone: '+1 512 731 2449',
   website: 'kiryuchi10.github.io',
   resetLabel: 'Reset',
   fallbackLabel: 'Send via Email Client',

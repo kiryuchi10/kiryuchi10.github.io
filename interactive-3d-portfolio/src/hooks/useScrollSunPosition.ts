@@ -12,7 +12,7 @@ type Options = {
   maxYRatio?: number;
 };
 
-export function useScrollSunPosition(options: Options = {}): { top: number } {
+export function useScrollSunPosition(options: Options = {}): { top: number; atBottom: boolean } {
   const {
     baseY = DEFAULT_BASE_Y,
     speed = DEFAULT_SPEED,
@@ -21,6 +21,7 @@ export function useScrollSunPosition(options: Options = {}): { top: number } {
   } = options;
 
   const [top, setTop] = useState(baseY);
+  const [atBottom, setAtBottom] = useState(false);
 
   useEffect(() => {
     const onScroll = (): void => {
@@ -28,6 +29,7 @@ export function useScrollSunPosition(options: Options = {}): { top: number } {
       const raw = baseY + window.scrollY * speed;
       const clamped = Math.max(minY, Math.min(maxY, raw));
       setTop(clamped);
+      setAtBottom(clamped >= maxY - 10);
     };
 
     onScroll();
@@ -39,5 +41,5 @@ export function useScrollSunPosition(options: Options = {}): { top: number } {
     };
   }, [baseY, speed, minY, maxYRatio]);
 
-  return { top };
+  return { top, atBottom };
 }

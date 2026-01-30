@@ -36,6 +36,9 @@ export function HeroSection(): React.ReactElement {
           <a href={hero.ctaResume.href} className="btn btn-primary" download target="_blank" rel="noopener noreferrer">
             {hero.ctaResume.label}
           </a>
+          <a href={hero.ctaCv.href} className="btn btn-secondary" download target="_blank" rel="noopener noreferrer">
+            {hero.ctaCv.label}
+          </a>
           <button
             type="button"
             className="btn btn-secondary"

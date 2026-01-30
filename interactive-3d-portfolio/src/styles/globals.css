@@ -1,3 +1,19 @@
+/* Responsive design: mobile-first, same optimized layout on all devices */
+:root {
+  --container-max: 1200px;
+  --container-padding: 1rem;
+  --section-padding-y: 3rem;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  /* Safe area for notched devices (e.g. iPhone) */
+  --safe-area-top: env(safe-area-inset-top, 0);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0);
+  --safe-area-left: env(safe-area-inset-left, 0);
+  --safe-area-right: env(safe-area-inset-right, 0);
+}
+
 *,
 *::before,
 *::after {
@@ -6,6 +22,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -15,6 +32,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #e8e6f0;
   background: transparent;
+  overflow-x: hidden;
 }
 
 #root {
@@ -31,6 +49,16 @@ body {
   z-index: 10;
 }
 
+/* Reusable container: centered, max-width, responsive padding */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
 /* Cursor trail canvas must stay transparent (no dark overlay) */
 .cursor-trail-canvas {
   background: transparent !important;
@@ -45,15 +73,42 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Sections: constrained width + responsive padding (same layout mobile/tablet/desktop) */
 section {
+  width: 100%;
+  max-width: var(--container-max);
   min-height: 60vh;
-  padding: 4rem 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: var(--section-padding-y) var(--container-padding);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@media (max-width: 768px) {
+/* Responsive: tablet */
+@media (min-width: 480px) {
+  :root {
+    --container-padding: 1.25rem;
+    --section-padding-y: 3.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-padding: 1.5rem;
+    --section-padding-y: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-padding: 2rem;
+  }
+}
+
+/* Mobile: tighter section padding for small screens */
+@media (max-width: 479px) {
   section {
-    padding: 2rem 1rem;
+    min-height: 50vh;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }

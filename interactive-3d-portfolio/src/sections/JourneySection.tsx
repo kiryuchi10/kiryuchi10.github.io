@@ -63,6 +63,7 @@ export function JourneySection(): React.ReactElement {
               <article
                 key={idx}
                 className={`timeline-item timeline-item--${idx % 2 === 0 ? 'left' : 'right'}`}
+                style={{ gridRow: idx + 1 }}
               >
                 <div className="timeline-card">
                   <div className="timeline-period">{item.period}</div>

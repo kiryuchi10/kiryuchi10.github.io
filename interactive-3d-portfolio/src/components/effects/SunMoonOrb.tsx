@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { useScrollSunPosition } from '../../hooks/useScrollSunPosition';
 import './SunMoonOrb.css';
 
-/** Local orb GIF: public/assets/DongHyeunLee/Project/GIF/7bk3 (2).gif */
+/** Default orb GIF; when orb reaches bottom, switch to XDZT.gif */
 const ORB_GIF = '/assets/DongHyeunLee/Project/GIF/7bk3%20(2).gif';
+const ORB_GIF_BOTTOM = '/assets/DongHyeunLee/Project/GIF/XDZT.gif';
 
 /**
  * Scroll-following sun/moon orb; moves down when scrolling down, up when scrolling up.
- * Uses local orb GIF; toggle to switch between sun (glowing) and moon (soft gray/blue).
+ * When orb reaches the bottom, image switches to XDZT.gif.
  */
 export function SunMoonOrb(): React.ReactElement {
-  const { top } = useScrollSunPosition({ baseY: 100, speed: 0.4, minY: 60, maxYRatio: 0.88 });
+  const { top, atBottom } = useScrollSunPosition({ baseY: 100, speed: 0.4, minY: 60, maxYRatio: 0.88 });
   const [isMoon, setIsMoon] = useState(false);
+  const orbGif = atBottom ? ORB_GIF_BOTTOM : ORB_GIF;
 
   return (
     <div
@@ -27,7 +29,7 @@ export function SunMoonOrb(): React.ReactElement {
         style={{
           width: 72,
           height: 72,
-          backgroundImage: `url(${ORB_GIF})`,
+          backgroundImage: `url(${orbGif})`,
         }}
       />
       <button

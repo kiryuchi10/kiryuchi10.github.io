@@ -5,7 +5,8 @@ import { skillIcons, type SkillIconItem } from '../config/skillIcons';
 export function SkillsSection(): React.ReactElement {
   return (
     <SectionContainer id="skills" title="Skills">
-      <div className="skills-icon-grid" role="list">
+      <div className="skills-section-inner">
+        <div className="skills-icon-grid" role="list">
         {skillIcons.map((s: SkillIconItem) => {
           const Icon = s.Icon as React.ComponentType<{ className?: string; 'aria-hidden'?: boolean }>;
           return (
@@ -22,6 +23,7 @@ export function SkillsSection(): React.ReactElement {
             </button>
           );
         })}
+        </div>
       </div>
     </SectionContainer>
   );
