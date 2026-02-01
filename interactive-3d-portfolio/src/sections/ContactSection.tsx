@@ -54,6 +54,8 @@ export function ContactSection(): React.ReactElement {
         setStatus('error');
         if (message.includes('fetch') || message.includes('Network') || message.includes('timeout') || code === 'ECONNABORTED') {
           setStatusMessage('Unable to connect. Use the email link below.');
+        } else if (message && !message.startsWith('HTTP ')) {
+          setStatusMessage(message);
         } else {
           setStatusMessage('Something went wrong. Try the email link below.');
         }
