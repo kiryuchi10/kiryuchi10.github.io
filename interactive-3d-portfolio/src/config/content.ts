@@ -41,7 +41,7 @@ export const resume = {
     'AiX Engineer (AI + Physical Systems) with an M.S. in Chemistry and hands-on experience across wet labs, manufacturing devices, and dry-lab automation. Experienced in operating and interpreting data from analytical instruments (HPLC, UV-Vis, XPS, XRD, SEM/FIB-SEM) and integrating vision-based inspection, precision dispensing, and liquid handling systems into data-driven workflows. Strong capability in in-silico analysis, image processing, statistical monitoring, and automation pipelines that convert physical signals into actionable process intelligence for manufacturing and reliability-focused environments.',
 
   summaryNote:
-    '(Interview Finalist: Samsung, ASML, Otsuka | Offer: SK Battery America)',
+    '(Interview Finalist: Samsung, ASML, Otsuka (continue ...) | Offer: SK Battery America)',
 
   coreSkills: [
     // AiX Core
