@@ -138,20 +138,23 @@ export const coverLetter = {
 
 export const presentationVideos = [
   {
-    title: 'Presentation 01 — AiX Engineering Overview',
-    description: 'Face + slide layout presentation introducing AiX engineering approach.',
+    title: 'Presentation 01 — My Career Path',
+    description:
+      'A personal walkthrough of my career path across chemistry, manufacturing systems, and AiX engineering.',
     src: '/assets/DongHyeunLee/Presentation/presentation-01.mp4',
     poster: '/assets/DongHyeunLee/Presentation/presentation-01-poster.jpg',
   },
   {
-    title: 'Presentation 02 — Manufacturing Reliability Case',
-    description: 'Discussion of process reliability and root-cause analysis workflow.',
+    title: 'Presentation 02 — Lithography_Digital Twin',
+    description:
+      'How lithography process understanding can be connected to a digital twin for monitoring and optimization.',
     src: '/assets/DongHyeunLee/Presentation/presentation-02.mp4',
     poster: '/assets/DongHyeunLee/Presentation/presentation-02-poster.jpg',
   },
   {
-    title: 'Presentation 03 — Data Pipeline and Dashboard',
-    description: 'Walk-through of data pipeline design and dashboard integration.',
+    title: 'Presentation 03 — 3D-Awareness Project',
+    description:
+      'A project focused on 3D awareness, visual understanding, and practical system integration.',
     src: '/assets/DongHyeunLee/Presentation/presentation-03.mp4',
     poster: '/assets/DongHyeunLee/Presentation/presentation-03-poster.jpg',
   },

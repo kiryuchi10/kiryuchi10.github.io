@@ -20,7 +20,7 @@ export function VideoCarouselSection(): React.ReactElement {
   if (!videoCount) return <></>;
 
   return (
-    <SectionContainer id="presentations" title="Presentations">
+    <SectionContainer id="presentations" title="Presentation Topics">
       <div className="presentation-carousel-card">
         {isActiveVideoUnavailable ? (
           <div className="presentation-video-frame presentation-video-placeholder" role="status">
