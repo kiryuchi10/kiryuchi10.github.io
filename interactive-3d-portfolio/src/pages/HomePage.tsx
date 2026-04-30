@@ -5,6 +5,7 @@ import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { HeroSection } from '../sections/HeroSection';
 import { ResumeSection } from '../sections/ResumeSection';
+import { VideoCarouselSection } from '../sections/VideoCarouselSection';
 import { JourneySection } from '../sections/JourneySection';
 import { SkillsSection } from '../sections/SkillsSection';
 import { ProjectsSection } from '../sections/ProjectsSection';
@@ -26,6 +27,7 @@ export function HomePage(): React.ReactElement {
         <main>
           <HeroSection />
           <ResumeSection />
+          <VideoCarouselSection />
           <JourneySection />
           <SkillsSection />
           <ProjectsSection />

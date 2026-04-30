@@ -136,6 +136,27 @@ export const coverLetter = {
   pdfUrl: '/resume/DONGHYEUN%20LEE_SAS_Metrology%20Process%20Engineer_Coverletter.pdf',
 };
 
+export const presentationVideos = [
+  {
+    title: 'Presentation 01 — AiX Engineering Overview',
+    description: 'Face + slide layout presentation introducing AiX engineering approach.',
+    src: '/assets/DongHyeunLee/Presentation/presentation-01.mp4',
+    poster: '/assets/DongHyeunLee/Presentation/presentation-01-poster.jpg',
+  },
+  {
+    title: 'Presentation 02 — Manufacturing Reliability Case',
+    description: 'Discussion of process reliability and root-cause analysis workflow.',
+    src: '/assets/DongHyeunLee/Presentation/presentation-02.mp4',
+    poster: '/assets/DongHyeunLee/Presentation/presentation-02-poster.jpg',
+  },
+  {
+    title: 'Presentation 03 — Data Pipeline and Dashboard',
+    description: 'Walk-through of data pipeline design and dashboard integration.',
+    src: '/assets/DongHyeunLee/Presentation/presentation-03.mp4',
+    poster: '/assets/DongHyeunLee/Presentation/presentation-03-poster.jpg',
+  },
+];
+
 export const skills = [
   { name: 'AiX Systems & Automation', level: 90 },
   { name: 'Wet Lab & Analytical Instruments', level: 88 },
